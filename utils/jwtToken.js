@@ -6,8 +6,6 @@ const sendToken = (user, statusCode, res) => {
     expiresIn: process.env.JWT_EXPIRES * 60 * 60 * 24 * 1000,
   });
 
-  console.log("jwt token =======> " + token);
-
   // Options for cookies
   const options = {
     expires: new Date(
@@ -22,7 +20,7 @@ const sendToken = (user, statusCode, res) => {
   };
 
   res.cookie('token', token, options);
-  res.status(200).send({ success: true, user, token });
+  res.status(200).send({ success: true, user });
 }
 
 module.exports = sendToken;
