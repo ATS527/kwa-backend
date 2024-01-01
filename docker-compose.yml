@@ -1,0 +1,32 @@
+version: '1.0'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - kwa-db:/var/lib/mysql
+  kwa-server:
+    build:
+      context: .
+      target: dev
+    environment:
+      JWT_SECRET_KEY: fawjegwkehgowegiweghwwef
+      JWT_EXPIRES: 10
+      COOKIE_EXPIRE: 10
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: kwa
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+      - 9229:9229
+    volumes:
+      - .:/opt/kwa_backend
+volumes:
+  kwa-db:
