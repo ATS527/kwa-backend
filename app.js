@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors({
-  origin: "*",
+  origin: ["http://localhost:3000", "http://localhost:5500"],
   credentials: true,
 }));
 
